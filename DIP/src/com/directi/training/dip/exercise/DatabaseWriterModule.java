@@ -3,14 +3,15 @@ package com.directi.training.dip.exercise;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MyDatabase
-{
+public class DatabaseWriterModule implements IWritable {
     private static Map<Integer, String> _data = new HashMap<>();
     private static int _count = 0;
 
-    public int write(String inputString)
-    {
-        _data.put(++_count, inputString);
-        return _count;
+    public void write(String data) {
+        _data.put(++_count, data);
+    }
+
+    public void close() {
+        // No closing operation needed
     }
 }
