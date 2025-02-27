@@ -1,0 +1,52 @@
+@startuml
+interface IDoor {
+    +lock()
+    +unlock()
+    +open()
+    +close()
+}
+
+interface ISensorDoor extends IDoor {
+    +proximityCallback()
+}
+
+interface ITimerDoor extends IDoor {
+    +timeOutCallback()
+}
+
+class Sensor {
+    +register(SensorDoor door)
+    -isPersonClose(): boolean
+}
+
+class Timer {
+    +register(long timeOut, TimerDoor door)
+}
+
+class SensorDoor implements ISensorDoor {
+    -boolean _locked
+    -boolean _opened
+    +SensorDoor(Sensor sensor)
+    +lock()
+    +unlock()
+    +open()
+    +close()
+    +proximityCallback()
+}
+
+class TimerDoor implements ITimerDoor {
+    -boolean _locked
+    -boolean _opened
+    +TimerDoor(Timer timer)
+    +lock()
+    +unlock()
+    +open()
+    +close()
+    +timeOutCallback()
+}
+
+Sensor -> SensorDoor : registers
+Timer -> TimerDoor : registers
+
+
+@enduml
