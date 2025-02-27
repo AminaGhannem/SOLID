@@ -1,13 +1,15 @@
 package com.directi.training.dip.exercise;
 
-import java.io.IOException;
+public class EncodingModuleClient {
+    public static void main(String[] args) throws Exception {
+        Encoder encoder = new Encoder();
 
-public class EncodingModuleClient
-{
-    public static void main(String[] args) throws IOException
-    {
-        EncodingModule encodingModule = new EncodingModule();
-        encodingModule.encodeWithFiles();
-        encodingModule.encodeBasedOnNetworkAndDatabase();
+        IReadable fileReader = new FileReaderModule("beforeEncryption.txt");
+        IWritable fileWriter = new FileWriterModule("afterEncryption.txt");
+        encoder.encode(fileReader, fileWriter);
+
+        IReadable networkReader = new NetworkReaderModule("http://myfirstappwith.appspot.com/index.html");
+        IWritable dbWriter = new DatabaseWriterModule();
+        encoder.encode(networkReader, dbWriter);
     }
 }
