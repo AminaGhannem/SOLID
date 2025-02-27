@@ -5,10 +5,10 @@ public class CarManager {
     private CarFormatter carFormatter;
     private CarComparator carComparator;
 
-    public CarManager() {
-        this.carRepository = new CarRepository();
-        this.carFormatter = new CarFormatter();
-        this.carComparator = new CarComparator();
+    public CarManager(CarRepository carRepository, CarFormatter carFormatter, CarComparator carComparator) {
+        this.carRepository = carRepository;
+        this.carFormatter = carFormatter;
+        this.carComparator = carComparator;
     }
 
     public String getCarsNames() {
