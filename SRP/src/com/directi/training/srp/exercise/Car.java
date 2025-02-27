@@ -1,5 +1,3 @@
-package com.directi.training.srp.exercise;
-
 public class Car
 {
     private final String _id;
