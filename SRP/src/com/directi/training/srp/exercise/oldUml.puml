@@ -1,0 +1,21 @@
+@startuml
+class Car {
+  - final _id: string
+  - final _model: string
+  - final _brand: string
+  +Car()
+  +getId(): string
+  +getBrand() : string
+  +getModel() : string
+}
+
+class CarManager {
+  - carsDb: List<Car>
+  +getFromDb()
+  +getCarsNames()
+  +getBestCar()
+}
+ 
+CarManager --> Car
+
+@enduml
