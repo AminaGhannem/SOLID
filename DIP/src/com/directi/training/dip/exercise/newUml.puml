@@ -1,0 +1,51 @@
+@startuml
+interface IReadable {
+    +read(): String
+    +close()
+}
+
+interface IWritable {
+    +write(String data)
+    +close()
+}
+
+class DatabaseWriterModule implements IWritable {
+    -static Map<Integer, String> _data
+    -static int _count
+    +write(String data)
+    +close()
+}
+
+class Encoder {
+    +encode(IReadable reader, IWritable writer)
+}
+
+class EncodingModuleClient {
+    +main(String[] args)
+}
+
+class FileReaderModule implements IReadable {
+    -BufferedReader reader
+    +FileReaderModule(String filePath)
+    +read(): String
+    +close()
+}
+
+class FileWriterModule implements IWritable {
+    -BufferedWriter writer
+    +FileWriterModule(String filePath)
+    +write(String data)
+    +close()
+}
+
+class NetworkReaderModule implements IReadable {
+    -InputStreamReader reader
+    +NetworkReaderModule(String url)
+    +read(): String
+    +close()
+}
+
+EncodingModuleClient -> Encoder : uses
+Encoder -> IReadable : reads from
+Encoder -> IWritable : writes to
+@enduml
