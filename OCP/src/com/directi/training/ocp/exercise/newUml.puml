@@ -1,0 +1,47 @@
+@startuml
+
+abstract class AbstractAllocator {
+    # List<Slot> slots
+    + allocate(int id)
+    + free(int id)
+    # abstract Slot findFree()
+}
+
+abstract class Slot {
+    # int id
+    + abstract isFree()
+    + abstract markFree()
+    + abstract markBusy()
+}
+
+class SpaceAllocator extends AbstractAllocator {
+    - List<SpaceSlot> spaceSlots
+    + SpaceAllocator(int numberOfSlots)
+    # SpaceSlot findFree()
+}
+
+class SpaceSlot extends Slot {
+    + boolean isFree()
+    + markFree()
+    + markBusy()
+}
+
+class TimeAllocator extends AbstractAllocator {
+    - List<TimeSlot> timeSlots
+    + TimeAllocator(int numberOfSlots)
+    # TimeSlot findFree()
+}
+
+class TimeSlot extends Slot {
+    + boolean isFree()
+    + markFree()
+    + markBusy()
+}
+
+class Client {}
+
+Slot --o AbstractAllocator
+Client --> TimeAllocator
+Client --> SpaceAllocator
+
+@enduml
